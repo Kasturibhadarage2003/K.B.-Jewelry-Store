@@ -1,0 +1,1 @@
+A beautifully designed jewelry store website offering a curated selection of rings, necklaces, earrings, bracelets, and anklets. This project showcases a seamless shopping experience with features including product browsing, adding items to a cart, and a checkout process with multiple payment and shipping options. Built using HTML, CSS, JavaScript
