@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Jewelry Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe5d9;
+            color: #5c4033;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ffad94;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ffffff;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #c44d34;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h3 {
+            color: #c44d34;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #c44d34;
+            border-radius: 5px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #ffad94;
+            color: #ffffff;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #c44d34;
+        }
+
+        footer {
+            background-color: #ffad94;
+            text-align: center;
+            padding: 10px;
+            color: #ffffff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #order-summary p {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #confirmation-message {
+            display: none;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #c44d34;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>K.B. Jewelry Store</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h2>Checkout</h2>
+    <form id="checkout-form">
+        <!-- Payment Information -->
+        <section>
+            <h3>Payment Information</h3>
+            <label for="card-name">Cardholder Name</label>
+            <input type="text" id="card-name" name="card-name" required>
+
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card-number" required>
+
+            <label for="card-expiry">Expiration Date</label>
+            <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/YY" required>
+
+            <label for="card-cvc">CVC</label>
+            <input type="text" id="card-cvc" name="card-cvc" required>
+        </section>
+
+        <!-- Order Summary -->
+        <section id="order-summary">
+            <h3>Order Summary</h3>
+            <p>Items: <span id="item-total">$0.00</span></p>
+            <p>Shipping: <span id="shipping-total">$0.00</span></p>
+            <p>Total: <span id="order-total">$0.00</span></p>
+        </section>
+
+        <button type="submit">Place Order</button>
+    </form>
+
+    <div id="confirmation-message">
+        <h3>Thank you for your order!</h3>
+        <p>Your order has been successfully placed.</p>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+         const itemTotal = cart.reduce((total, item) => total + item.price, 0);
+         const shippingTotal = itemTotal > 0 ? 50 : 0; // Example shipping calculation
+         const orderTotal = itemTotal + shippingTotal;
+
+         document.getElementById('item-total').textContent = `₹${itemTotal.toFixed(2)}`;
+         document.getElementById('shipping-total').textContent = `₹${shippingTotal.toFixed(2)}`;
+         document.getElementById('order-total').textContent = `₹${orderTotal.toFixed(2)}`;
+     });
+
+     document.getElementById('checkout-form').addEventListener('submit', function(event) {
+         event.preventDefault(); // Prevent the form from submitting
+
+         // Hide the form
+         document.getElementById('checkout-form').style.display = 'none';
+
+         // Show the confirmation message
+         document.getElementById('confirmation-message').style.display = 'block';
+
+         // Clear the cart
+         localStorage.removeItem('cart');
+     });
+</script>
+</body>
+</html>

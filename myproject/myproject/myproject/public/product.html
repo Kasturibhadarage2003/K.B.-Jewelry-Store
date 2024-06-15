@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS styles */
+        header {
+            display: flex;
+            justify-content: space-between; /* Align items in the header */
+            align-items: center; /* Vertically center items */
+            padding: 10px 20px; /* Adjust padding */
+            background-color: #ffb6c1; /* Pastel pink background */
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #ffb6c1;
+        }
+
+        .store-title {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            align-items: center; /* Align category links vertically */
+        }
+
+        nav ul li {
+            margin-right: 15px; /* Adjust spacing between category links */
+        }
+
+        header a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .category-title {
+            margin-top: 60px; /* Adjust margin */
+            text-align: center;
+            font-size: 1.5em;
+            color: #000000; /* Pastel pink color for title */
+            margin-bottom: 20px;
+        }
+        /* Style for Add to Cart button */
+        .product button {
+            background-color: #ffb6c1; /* Peach color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body onload="showProducts('rings')">
+<header>
+    <h1 class="store-title">K.B. Jewelry Store</h1>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showProducts('rings')">Rings</a></li>
+            <li><a href="#" onclick="showProducts('necklaces')">Necklaces</a></li>
+            <li><a href="#" onclick="showProducts('earrings')">Earrings</a></li>
+            <li><a href="#" onclick="showProducts('bracelets')">Bracelets</a></li>
+            <li><a href="#" onclick="showProducts('anklets')">Anklets</a></li>
+        </ul>
+    </nav>
+    <a href="checkout.html">View Cart</a>
+</header>
+
+<div class="container">
+    <h2 class="category-title">Featured Products</h2>
+    <div id="products-container" class="product-container">
+        <!-- Product listings will be dynamically added here -->
+    </div>
+</div>
+
+<script src="script.js">
+
+    function addToCart(button) {
+        const product = button.parentElement;
+        const name = product.getAttribute('data-name');
+        const price = parseFloat(product.getAttribute('data-price'));
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name, price });
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Product added to cart!');</script>
+</body>
+</html>
